@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Preethi 🎂</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      background: white;
+      color: #ff4b7d;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .cake {
+      font-size: 140px;
+      margin: 20px 0;
+    }
+
+    .message {
+      max-width: 700px;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      background: rgba(255,255,255,0.15);
+      padding: 25px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Slide 1 -->
+<div class="slide active" id="slide1">
+  <h1>🎉 Happy Birthday Preethi 🎉</h1>
+  <p>Today is all about you 💖</p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide" id="slide2">
+  <h1>Make a Wish ✨</h1>
+  <div class="cake">🎂🕯️</div>
+  <p>Tap below to blow the candle</p>
+  <button onclick="blowCandle()">Blow Candle 💨</button>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide" id="slide3">
+  <h1>💖 For You, Preethi 💖</h1>
+  <div class="message">
+    Ever since we met, my life has changed in the most beautiful way.
+    You brought happiness, warmth, and meaning into my world without even trying.
+    I feel incredibly lucky to have you in my life.
+    Happy Birthday, Preethi ❤️
+  </div>
+</div>
+
+<script>
+  let current = 1;
+
+  function nextSlide() {
+    document.getElementById('slide' + current).classList.remove('active');
+    current++;
+    document.getElementById('slide' + current).classList.add('active');
+  }
+
+  function blowCandle() {
+    nextSlide();
+  }
+</script>
+
+</body>
+</html>
