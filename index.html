@@ -1,105 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Happy Birthday Preethi 🎂</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Happy Birthday Preethi 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      color: white;
-      text-align: center;
-      overflow: hidden;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap');
 
-    .slide {
-      display: none;
-      height: 100vh;
-      width: 100vw;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: 20px;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    .slide.active {
-      display: flex;
-    }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #ff9aa2, #ff6f91);
+  color: white;
+  overflow: hidden;
+}
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: all 1s ease;
+  padding: 30px;
+  text-align: center;
+}
 
-    button {
-      padding: 14px 28px;
-      font-size: 16px;
-      border: none;
-      border-radius: 30px;
-      background: white;
-      color: #ff4b7d;
-      cursor: pointer;
-      margin-top: 20px;
-    }
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
 
-    .cake {
-      font-size: 140px;
-      margin: 20px 0;
-    }
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
 
-    .message {
-      max-width: 700px;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      background: rgba(255,255,255,0.15);
-      padding: 25px;
-      border-radius: 20px;
-    }
-  </style>
+p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  line-height: 1.7;
+}
+
+button {
+  margin-top: 30px;
+  padding: 14px 34px;
+  border-radius: 50px;
+  border: none;
+  background: white;
+  color: #ff4d6d;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.cake {
+  font-size: 160px;
+  position: relative;
+}
+
+.flame {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  animation: flicker 0.3s infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: translateX(-50%) scale(1); }
+  to { transform: translateX(-50%) scale(1.2); }
+}
+
+.message-box {
+  background: rgba(255,255,255,0.15);
+  padding: 30px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+}
+
+.typed {
+  border-right: 2px solid white;
+  white-space: pre-wrap;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+.heart {
+  position: absolute;
+  bottom: -50px;
+  font-size: 20px;
+  animation: float 10s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-120vh); }
+}
+</style>
 </head>
+
 <body>
 
+<!-- Floating hearts -->
+<script>
+for (let i = 0; i < 25; i++) {
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "💖";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = (6 + Math.random() * 6) + "s";
+  document.body.appendChild(h);
+}
+</script>
+
 <!-- Slide 1 -->
-<div class="slide active" id="slide1">
-  <h1>🎉 Happy Birthday Preethi 🎉</h1>
-  <p>Today is all about you 💖</p>
-  <button onclick="nextSlide()">Next</button>
+<div class="slide active" id="s1">
+  <h1>Happy Birthday, Preethi 🎉</h1>
+  <p>Today is about celebrating you — and how special you are.</p>
+  <button onclick="next()">Continue</button>
 </div>
 
 <!-- Slide 2 -->
-<div class="slide" id="slide2">
+<div class="slide" id="s2">
   <h1>Make a Wish ✨</h1>
-  <div class="cake">🎂🕯️</div>
-  <p>Tap below to blow the candle</p>
-  <button onclick="blowCandle()">Blow Candle 💨</button>
+  <div class="cake">
+    🎂
+    <div class="flame" id="flame">🔥</div>
+  </div>
+  <button onclick="blow()">Blow the Candle</button>
 </div>
 
 <!-- Slide 3 -->
-<div class="slide" id="slide3">
-  <h1>💖 For You, Preethi 💖</h1>
-  <div class="message">
-    Ever since we met, my life has changed in the most beautiful way.
-    You brought happiness, warmth, and meaning into my world without even trying.
-    I feel incredibly lucky to have you in my life.
-    Happy Birthday, Preethi ❤️
+<div class="slide" id="s3">
+  <h1>For You 💖</h1>
+  <div class="message-box">
+    <p id="text" class="typed"></p>
   </div>
 </div>
 
 <script>
-  let current = 1;
+let slide = 1;
 
-  function nextSlide() {
-    document.getElementById('slide' + current).classList.remove('active');
-    current++;
-    document.getElementById('slide' + current).classList.add('active');
-  }
+function next() {
+  document.getElementById('s' + slide).classList.remove('active');
+  slide++;
+  document.getElementById('s' + slide).classList.add('active');
+}
 
-  function blowCandle() {
-    nextSlide();
+function blow() {
+  document.getElementById('flame').style.display = 'none';
+  next();
+  typeMessage();
+}
+
+const message = `Ever since we met, my life has changed in ways I never expected.
+You brought warmth, happiness, and meaning into my world just by being you.
+I feel incredibly lucky to have you in my life.
+Happy Birthday, Preethi ❤️`;
+
+let i = 0;
+function typeMessage() {
+  if (i < message.length) {
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeMessage, 45);
   }
+}
 </script>
 
 </body>
