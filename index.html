@@ -1,193 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Happy Birthday Preethi 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Preethi!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      font-family: 'Great Vibes', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      color: #333;
+      overflow-x: hidden;
+    }
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap');
+    h1 { font-size: 60px; margin-bottom: 10px; }
+    h2 { font-size: 30px; margin-bottom: 40px; }
 
-* {
-  box-sizing: border-box;
-}
+    .cake-container { position: relative; display: inline-block; margin-bottom: 30px; }
 
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at top, #ff9aa2, #ff6f91);
-  color: white;
-  overflow: hidden;
-}
+    .cake {
+      width: 250px;
+      height: 150px;
+      background: linear-gradient(to bottom, #f9c5d1, #f48fb1);
+      border-radius: 20px;
+      position: relative;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      animation: glow 2s infinite alternate;
+    }
 
-.slide {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transform: scale(1.05);
-  transition: all 1s ease;
-  padding: 30px;
-  text-align: center;
-}
+    @keyframes glow {
+      0% { box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+      100% { box-shadow: 0 10px 40px rgba(255,192,203,0.8); }
+    }
 
-.slide.active {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 1;
-}
+    /* Sparkles on cake */
+    .sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: #fff;
+      border-radius: 50%;
+      top: 20%;
+      left: 20%;
+      opacity: 0;
+      animation: sparkle 1.5s infinite;
+    }
 
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
 
-p {
-  font-size: 1.1rem;
-  max-width: 700px;
-  line-height: 1.7;
-}
+    .candle {
+      width: 12px;
+      height: 45px;
+      background: #ffeb3b;
+      position: absolute;
+      top: -45px;
+      border-radius: 3px;
+      transform-origin: bottom;
+      animation: sway 2s infinite alternate;
+      cursor: pointer;
+    }
 
-button {
-  margin-top: 30px;
-  padding: 14px 34px;
-  border-radius: 50px;
-  border: none;
-  background: white;
-  color: #ff4d6d;
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
+    @keyframes sway {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(2deg); }
+      100% { transform: rotate(-2deg); }
+    }
 
-button:hover {
-  transform: scale(1.05);
-}
+    .flame {
+      width: 12px;
+      height: 20px;
+      background: radial-gradient(circle at 50% 50%, #ff9800, #ff5722);
+      border-radius: 50%;
+      position: absolute;
+      top: -20px;
+      left: 0;
+      opacity: 0;
+      animation: flicker 0.5s infinite alternate;
+      pointer-events: none;
+    }
 
-.cake {
-  font-size: 160px;
-  position: relative;
-}
+    @keyframes flicker {
+      0% { transform: scaleY(1) translateX(0); opacity:1; }
+      50% { transform: scaleY(0.8) translateX(-1px); opacity:0.9; }
+      100% { transform: scaleY(1.1) translateX(1px); opacity:1; }
+    }
 
-.flame {
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 40px;
-  animation: flicker 0.3s infinite alternate;
-}
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff4081;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+      margin-bottom: 20px;
+    }
 
-@keyframes flicker {
-  from { transform: translateX(-50%) scale(1); }
-  to { transform: translateX(-50%) scale(1.2); }
-}
+    button:hover { transform: scale(1.05); }
 
-.message-box {
-  background: rgba(255,255,255,0.15);
-  padding: 30px;
-  border-radius: 25px;
-  backdrop-filter: blur(10px);
-}
+    .confetti { position: fixed; width: 10px; height: 10px; background-color: red; top: -10px; z-index: 9999; pointer-events: none; opacity: 0.9; }
 
-.typed {
-  border-right: 2px solid white;
-  white-space: pre-wrap;
-  animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
-.heart {
-  position: absolute;
-  bottom: -50px;
-  font-size: 20px;
-  animation: float 10s linear infinite;
-  opacity: 0.6;
-}
-
-@keyframes float {
-  from { transform: translateY(0); }
-  to { transform: translateY(-120vh); }
-}
-</style>
+    @media(max-width: 600px){
+      h1 { font-size: 40px; }
+      h2 { font-size: 22px; }
+      .cake { width: 180px; height: 120px; }
+      .candle { height: 35px; width: 10px; }
+      .flame { height: 15px; width: 10px; }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- Floating hearts -->
-<script>
-for (let i = 0; i < 25; i++) {
-  let h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = "💖";
-  h.style.left = Math.random() * 100 + "vw";
-  h.style.animationDuration = (6 + Math.random() * 6) + "s";
-  document.body.appendChild(h);
-}
-</script>
+  <h1>Happy Birthday Preethi!</h1>
+  <h2>Wishing You Lots of Joy & Happiness 🎉</h2>
 
-<!-- Slide 1 -->
-<div class="slide active" id="s1">
-  <h1>Happy Birthday, Preethi 🎉</h1>
-  <p>Today is about celebrating you — and how special you are.</p>
-  <button onclick="next()">Continue</button>
-</div>
-
-<!-- Slide 2 -->
-<div class="slide" id="s2">
-  <h1>Make a Wish ✨</h1>
-  <div class="cake">
-    🎂
-    <div class="flame" id="flame">🔥</div>
+  <div class="cake-container">
+    <div class="cake"></div>
   </div>
-  <button onclick="blow()">Blow the Candle</button>
-</div>
 
-<!-- Slide 3 -->
-<div class="slide" id="s3">
-  <h1>For You 💖</h1>
-  <div class="message-box">
-    <p id="text" class="typed"></p>
-  </div>
-</div>
+  <button id="blow-all">Blow Out All Candles</button>
 
-<script>
-let slide = 1;
+  <!-- Audio -->
+  <audio id="blow-sound" src="https://www.soundjay.com/human/sounds/birthday-candle-blow-1.mp3" preload="auto"></audio>
+  <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop preload="auto"></audio>
 
-function next() {
-  document.getElementById('s' + slide).classList.remove('active');
-  slide++;
-  document.getElementById('s' + slide).classList.add('active');
-}
+  <script>
+    const cakeContainer = document.querySelector('.cake-container');
+    const cake = document.querySelector('.cake');
+    const candleCount = 6;
 
-function blow() {
-  document.getElementById('flame').style.display = 'none';
-  next();
-  typeMessage();
-}
+    // Add sparkles
+    for(let i=0;i<10;i++){
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.top = Math.random()*80 + '%';
+      sparkle.style.left = Math.random()*80 + '%';
+      cake.appendChild(sparkle);
+    }
 
-const message = `Ever since we met, my life has changed in ways I never expected.
-You brought warmth, happiness, and meaning into my world just by being you.
-I feel incredibly lucky to have you in my life.
-Happy Birthday, Preethi ❤️`;
+    // Add candles dynamically
+    for(let i=0;i<candleCount;i++){
+      const candle = document.createElement('div');
+      candle.classList.add('candle');
+      candle.style.left = `${20 + i*35}px`;
 
-let i = 0;
-function typeMessage() {
-  if (i < message.length) {
-    document.getElementById("text").innerHTML += message.charAt(i);
-    i++;
-    setTimeout(typeMessage, 45);
-  }
-}
-</script>
+      const flame = document.createElement('div');
+      flame.classList.add('flame');
+      flame.style.opacity = 1;
+      candle.appendChild(flame);
+
+      // Blow out candle individually
+      candle.addEventListener('click', () => {
+        flame.style.transition = 'opacity 1s';
+        flame.style.opacity = 0;
+        playBlowSound();
+        checkAllCandles();
+      });
+
+      cakeContainer.appendChild(candle);
+    }
+
+    const flames = document.querySelectorAll('.flame');
+    const blowBtn = document.getElementById('blow-all');
+    const blowSound = document.getElementById('blow-sound');
+    const bgMusic = document.getElementById('bg-music');
+
+    // Auto play background music
+    bgMusic.volume = 0.3;
+    bgMusic.play().catch(() => { console.log("User interaction needed for autoplay"); });
+
+    function playBlowSound(){
+      blowSound.currentTime = 0;
+      blowSound.play();
+    }
+
+    // Blow all candles
+    blowBtn.addEventListener('click', () => {
+      flames.forEach(f => f.style.opacity = 0);
+      playBlowSound();
+      launchConfetti(100);
+    });
+
+    // Check if all candles are blown
+    function checkAllCandles(){
+      const remaining = [...flames].filter(f => f.style.opacity != 0);
+      if(remaining.length === 0){
+        launchConfetti(100);
+      }
+    }
+
+    // Confetti
+    function launchConfetti(count){
+      for(let i=0;i<count;i++){
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.backgroundColor = randomColor();
+        confetti.style.left = Math.random()*window.innerWidth + 'px';
+        confetti.style.animation = `fall ${2+Math.random()*3}s linear forwards`;
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(),5000);
+      }
+    }
+
+    function randomColor(){
+      const colors = ['#f44336','#e91e63','#ffeb3b','#4caf50','#2196f3','#ff9800','#9c27b0'];
+      return colors[Math.floor(Math.random()*colors.length)];
+    }
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg); opacity:1; }
+        100% { transform: translateY(100vh) rotate(360deg); opacity:0.8; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 
 </body>
 </html>
