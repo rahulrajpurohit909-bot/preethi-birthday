@@ -24,6 +24,8 @@
     h1 { font-size: 60px; margin-bottom: 10px; }
     h2 { font-size: 30px; margin-bottom: 40px; }
 
+    .slide { width: 100%; }
+
     .cake-container { position: relative; display: inline-block; margin-bottom: 30px; }
 
     .cake {
@@ -41,15 +43,13 @@
       100% { box-shadow: 0 10px 40px rgba(255,192,203,0.8); }
     }
 
-    /* Sparkles on cake */
+    /* Sparkles */
     .sparkle {
       position: absolute;
       width: 6px;
       height: 6px;
       background-color: #fff;
       border-radius: 50%;
-      top: 20%;
-      left: 20%;
       opacity: 0;
       animation: sparkle 1.5s infinite;
     }
@@ -86,7 +86,7 @@
       position: absolute;
       top: -20px;
       left: 0;
-      opacity: 0;
+      opacity: 1;
       animation: flicker 0.5s infinite alternate;
       pointer-events: none;
     }
@@ -124,14 +124,23 @@
 </head>
 <body>
 
-  <h1>Happy Birthday Preethi!</h1>
-  <h2>Wishing You Lots of Joy & Happiness 🎉</h2>
+  <!-- Slide 1: Cake -->
+  <div class="slide" id="slide1">
+    <h1>Happy Birthday Preethi!</h1>
+    <h2>Wishing You Lots of Joy & Happiness 🎉</h2>
 
-  <div class="cake-container">
-    <div class="cake"></div>
+    <div class="cake-container">
+      <div class="cake"></div>
+    </div>
+
+    <button id="blow-all">Blow Out All Candles</button>
   </div>
 
-  <button id="blow-all">Blow Out All Candles</button>
+  <!-- Slide 2: Make a Wish -->
+  <div class="slide" id="slide2" style="display:none;">
+    <h1>🎉 Make a Wish! 🎉</h1>
+    <h2>Hope all your dreams come true!</h2>
+  </div>
 
   <!-- Audio -->
   <audio id="blow-sound" src="https://www.soundjay.com/human/sounds/birthday-candle-blow-1.mp3" preload="auto"></audio>
@@ -142,7 +151,7 @@
     const cake = document.querySelector('.cake');
     const candleCount = 6;
 
-    // Add sparkles
+    // Sparkles
     for(let i=0;i<10;i++){
       const sparkle = document.createElement('div');
       sparkle.classList.add('sparkle');
@@ -151,7 +160,8 @@
       cake.appendChild(sparkle);
     }
 
-    // Add candles dynamically
+    // Add candles
+    const flamesArray = [];
     for(let i=0;i<candleCount;i++){
       const candle = document.createElement('div');
       candle.classList.add('candle');
@@ -159,10 +169,10 @@
 
       const flame = document.createElement('div');
       flame.classList.add('flame');
-      flame.style.opacity = 1;
       candle.appendChild(flame);
+      flamesArray.push(flame);
 
-      // Blow out candle individually
+      // Blow individual candle
       candle.addEventListener('click', () => {
         flame.style.transition = 'opacity 1s';
         flame.style.opacity = 0;
@@ -173,14 +183,13 @@
       cakeContainer.appendChild(candle);
     }
 
-    const flames = document.querySelectorAll('.flame');
     const blowBtn = document.getElementById('blow-all');
     const blowSound = document.getElementById('blow-sound');
     const bgMusic = document.getElementById('bg-music');
 
-    // Auto play background music
+    // Autoplay music
     bgMusic.volume = 0.3;
-    bgMusic.play().catch(() => { console.log("User interaction needed for autoplay"); });
+    bgMusic.play().catch(() => { console.log("Autoplay blocked, click to start music"); });
 
     function playBlowSound(){
       blowSound.currentTime = 0;
@@ -189,17 +198,24 @@
 
     // Blow all candles
     blowBtn.addEventListener('click', () => {
-      flames.forEach(f => f.style.opacity = 0);
+      flamesArray.forEach(f => f.style.opacity = 0);
       playBlowSound();
       launchConfetti(100);
+      setTimeout(goToNextSlide, 1500);
     });
 
-    // Check if all candles are blown
+    // Check if all candles blown individually
     function checkAllCandles(){
-      const remaining = [...flames].filter(f => f.style.opacity != 0);
+      const remaining = flamesArray.filter(f => f.style.opacity != 0);
       if(remaining.length === 0){
         launchConfetti(100);
+        setTimeout(goToNextSlide, 1500);
       }
+    }
+
+    function goToNextSlide(){
+      document.getElementById('slide1').style.display = 'none';
+      document.getElementById('slide2').style.display = 'block';
     }
 
     // Confetti
